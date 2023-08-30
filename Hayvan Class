@@ -1,0 +1,72 @@
+using System;
+
+// Hayvan sınıfı (Temel sınıf)
+abstract class Hayvan
+{
+    public string TurAdi { get; set; }
+    public double Agirlik { get; set; }
+    public int Yas { get; set; }
+
+    public abstract double GetDosage(); // Her hayvan türüne göre implemente edilecek
+    public abstract string GetFeedSchedule(); // Her hayvan türüne göre implemente edilecek
+}
+
+// At sınıfı (Hayvan sınıfından türetilen)
+class Atlar : Hayvan
+{
+    public Atlar(string turAdi, double agirlik, int yas)
+    {
+        TurAdi = turAdi;
+        Agirlik = agirlik;
+        Yas = yas;
+    }
+
+    public override double GetDosage()
+    {
+        // At için ilaç dozajı hesaplaması
+        return Agirlik * 0.05;
+    }
+
+    public override string GetFeedSchedule()
+    {
+        // At için yem verme zamanları hesaplaması
+        return "Sabah ve akşam";
+    }
+}
+
+// Kedigiller sınıfı (Hayvan sınıfından türetilen)
+class Kedigiller : Hayvan
+{
+    public Kedigiller(string turAdi, double agirlik, int yas)
+    {
+        TurAdi = turAdi;
+        Agirlik = agirlik;
+        Yas = yas;
+    }
+
+    public override double GetDosage()
+    {
+        // Kedigiller için ilaç dozajı hesaplaması
+        return Agirlik * 0.1;
+    }
+
+    public override string GetFeedSchedule()
+    {
+        // Kedigiller için yem verme zamanları hesaplaması
+        return "Günde bir defa";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Hayvan at = new Atlar("At", 250, 5);
+        Console.WriteLine($"{at.TurAdi} için ilaç dozajı: {at.GetDosage()} ml");
+        Console.WriteLine($"{at.TurAdi} için yem verme zamanları: {at.GetFeedSchedule()}");
+
+        Hayvan kaplan = new Kedigiller("Kaplan", 150, 3);
+        Console.WriteLine($"{kaplan.TurAdi} için ilaç dozajı: {kaplan.GetDosage()} ml");
+        Console.WriteLine($"{kaplan.TurAdi} için yem verme zamanları: {kaplan.GetFeedSchedule()}");
+    }
+}
